@@ -222,19 +222,19 @@ spec:
       - name: LABELS
         value:
         - $(tasks.generate-labels.results.labels[*])
-        - description="Migration Toolkit for Containers Hook Runner"
-        - name="rhmtc/openshift-migration-hook-runner-rhel8"
+        - description=Migration Toolkit for Containers Hook Runner
+        - name=rhmtc/openshift-migration-hook-runner-rhel8
         - url=https://github.com/migtools/hook-runner
         - vendor=Red Hat, Inc.
-        - summary="Migration Toolkit for Containers Hook Runner"
-        - maintainer="Migration Team <ocp-migrate-team@redhat.com>"
-        - com.redhat.component="openshift-migration-hook-runner-container"
-        - version="v1.8.8"
-        - License="ASL 2.0"
-        - io.k8s.display-name="Migration Toolkit for Containers"
-        - io.openshift.tags="migration"
-        - io.k8s.description="Migration Toolkit for Containers Hook Runner"
-        - io.openshift.build.source-location="https://github.com/migtools/hook-runner"
+        - summary=Migration Toolkit for Containers Hook Runner
+        - maintainer=Migration Team <ocp-migrate-team@redhat.com>
+        - com.redhat.component=openshift-migration-hook-runner-container
+        - version=v1.8.8
+        - License=ASL 2.0
+        - io.k8s.display-name=Migration Toolkit for Containers
+        - io.openshift.tags=migration
+        - io.k8s.description=Migration Toolkit for Containers Hook Runner
+        - io.openshift.build.source-location=https://github.com/migtools/hook-runner
       runAfter:
       - prefetch-dependencies
       taskRef:
