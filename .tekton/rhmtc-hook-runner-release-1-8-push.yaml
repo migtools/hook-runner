@@ -216,6 +216,22 @@ spec:
         value: $(tasks.prefetch-dependencies.results.SOURCE_ARTIFACT)
       - name: CACHI2_ARTIFACT
         value: $(tasks.prefetch-dependencies.results.CACHI2_ARTIFACT)
+      - name: LABELS
+        value:
+        - $(tasks.generate-labels.results.labels[*])
+        - description="Migration Toolkit for Containers Hook Runner"
+        - name="rhmtc/openshift-migration-hook-runner-rhel8"
+        - url=https://github.com/migtools/hook-runner
+        - vendor=Red Hat, Inc.
+        - summary="Migration Toolkit for Containers Hook Runner"
+        - maintainer="Migration Team <ocp-migrate-team@redhat.com>"
+        - com.redhat.component="openshift-migration-hook-runner-container"
+        - version="v1.8.8"
+        - License="ASL 2.0"
+        - io.k8s.display-name="Migration Toolkit for Containers"
+        - io.openshift.tags="migration"
+        - io.k8s.description="Migration Toolkit for Containers Hook Runner"
+        - io.openshift.build.source-location="https://github.com/migtools/hook-runner"
       runAfter:
       - prefetch-dependencies
       taskRef:
@@ -583,6 +599,28 @@ spec:
         operator: in
         values:
         - "false"
+    - name: generate-labels
+      params:
+      - name: label-templates
+        value:
+        - build-date=$SOURCE_DATE
+        - short-commit=$(tasks.clone-repository.results.short-commit)
+        - io.openshift.build.commit.id=$(tasks.clone-repository.results.commit)
+        - io.openshift.build.commit.url=https://github.com/migtools/hook-runner/commit/$(tasks.clone-repository.results.commit)
+        - release=$ACTUAL_DATE_EPOCH
+      - name: source-date-epoch
+        value: $(tasks.clone-repository.results.commit-timestamp)
+      runAfter:
+      - clone-repository
+      taskRef:
+        params:
+        - name: name
+          value: generate-labels
+        - name: bundle
+          value: quay.io/konflux-ci/tekton-catalog/task-generate-labels:0.1@sha256:e1f4746dc33206a17867ead8f5c82a569cd925d352a19d108f205f54efc5589d
+        - name: kind
+          value: task
+        resolver: bundles
     workspaces:
     - name: git-auth
       optional: true
