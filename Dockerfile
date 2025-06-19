@@ -1,4 +1,4 @@
-FROM quay.io/openshift/origin-cli:4.11 as cli
+FROM quay.io/openshift/origin-cli:4.20 as cli
 
 FROM quay.io/ansible/ansible-runner:stable-2.12-latest
 COPY --from=cli /usr/bin/oc /usr/bin/oc
