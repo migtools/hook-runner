@@ -1,4 +1,5 @@
 FROM registry.redhat.io/ansible-automation-platform-25/platform-resource-runner-rhel8:latest
+RUN microdnf -y update && microdnf clean all
 RUN chmod 777 /home/runner/.ansible && chmod 777 /home/runner/.ansible/tmp
 RUN mkdir /.ansible && chmod 777 /.ansible
 COPY /licenses /licenses
