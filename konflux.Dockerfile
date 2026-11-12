@@ -1,5 +1,6 @@
 FROM registry.redhat.io/ansible-automation-platform-25/platform-resource-runner-rhel8:latest
-RUN pip3 install --upgrade 'dnspython>=2.9.0' 'azure-core>=1.38.0'
+COPY hack/build/third-party/pip3-install-dir/ /tmp/pip3-install-dir/
+RUN pip3 install --no-index --no-deps /tmp/pip3-install-dir/*.whl && rm -rf /tmp/pip3-install-dir/
 RUN microdnf -y update && microdnf clean all
 RUN chmod 777 /home/runner/.ansible && chmod 777 /home/runner/.ansible/tmp
 RUN mkdir /.ansible && chmod 777 /.ansible
